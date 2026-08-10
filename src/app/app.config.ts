@@ -4,8 +4,8 @@ import { routes } from "./app.routes";
 
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideRouter(routes)
-  ]
+	providers: [
+		provideBrowserGlobalErrorListeners(),
+		provideRouter(routes)
+	]
 };
