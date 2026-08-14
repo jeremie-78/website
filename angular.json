@@ -59,7 +59,8 @@
 						"allowedHosts": true,
 						"ssl": true,
 						"sslCert": "../.tls/cert.pem",
-						"sslKey": "../.tls/privkey.pem"
+						"sslKey": "../.tls/privkey.pem",
+						"port": 443
 					},
 					"configurations": {
 						"production": {
