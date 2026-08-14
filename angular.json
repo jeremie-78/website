@@ -58,7 +58,8 @@
 						"host": "::",
 						"allowedHosts": true,
 						"ssl": true,
-						"port": 443
+						"port": 443,
+						"proxyConfig": "proxy.conf.json"
 					},
 					"configurations": {
 						"production": {

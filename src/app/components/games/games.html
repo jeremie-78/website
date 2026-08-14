@@ -1,0 +1,13 @@
+<p>Number of games : {{games().length}}</p>
+
+<table>
+	<tr>
+		<th>Title</th>
+	</tr>
+
+	@for (game of games(); track game) {
+		<tr>
+			<td>{{game.TITLE}}</td>
+		</tr>
+	}
+</table>
