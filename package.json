@@ -3,7 +3,7 @@
 	"private": true,
 	"scripts": {
 		"ng": "ng",
-		"start": "ng serve",
+		"start": "ng serve --ssl-cert $CERT_PATH --ssl-key $KEY_PATH",
 		"build": "ng build",
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test"
