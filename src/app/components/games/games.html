@@ -3,11 +3,19 @@
 <table>
 	<tr>
 		<th>Title</th>
+		<th>Console</th>
 	</tr>
 
 	@for (game of games(); track game) {
 		<tr>
 			<td>{{game.TITLE}}</td>
+			<td>{{game.CONSOLE}}</td>
 		</tr>
 	}
 </table>
+
+<form #form="ngForm" (ngSubmit)="addGame(form)">
+	<input name="TITLE" ngModel>
+	<input name="CONSOLE" ngModel>
+	<input type="submit">
+</form>

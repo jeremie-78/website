@@ -1,13 +1,15 @@
-import { Component, OnInit, Signal } from "@angular/core";
+import { Component, type Signal } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { DatabaseService } from "app/services/database";
-import { Game } from "app/interfaces/game";
+import { type Game } from "app/interfaces/game";
+import { FormsModule, type NgForm } from '@angular/forms';
 
 
 @Component({
 	selector: "app-games",
 	templateUrl: "./games.html",
 	styleUrl: "./games.css",
+	imports: [FormsModule]
 })
 export class GamesComponent {
 
@@ -15,5 +17,9 @@ export class GamesComponent {
 
 	constructor (private databaseService: DatabaseService) {
 		this.games = toSignal<Game[], Game[]>(this.databaseService.getGames(), { initialValue: [] });
+	}
+
+	addGame (form: NgForm): void {
+		this.databaseService.addGame(form.value);
 	}
 }
