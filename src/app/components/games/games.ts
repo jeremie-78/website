@@ -1,8 +1,8 @@
 import { Component, type Signal } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
+import { FormsModule, type NgForm } from '@angular/forms';
 import { DatabaseService } from "app/services/database";
 import { type Game } from "app/interfaces/game";
-import { FormsModule, type NgForm } from '@angular/forms';
 
 
 @Component({

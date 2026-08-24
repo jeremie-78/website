@@ -1,5 +1,5 @@
-import { HttpClient, type HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { HttpClient, type HttpResponse } from "@angular/common/http";
 import { type Observable } from "rxjs";
 import { type Game } from "app/interfaces/game";
 
