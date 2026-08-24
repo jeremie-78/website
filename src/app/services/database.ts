@@ -4,7 +4,7 @@ import { type Observable } from "rxjs";
 import { type Game } from "app/interfaces/game";
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class DatabaseService {
 
 	constructor (private httpClient: HttpClient) {}
