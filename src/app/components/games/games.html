@@ -1,4 +1,20 @@
-<p>Number of games : {{games().length}}</p>
+<span>Search</span>
+
+<form #searchForm="ngForm" (ngSubmit)="search(searchForm)">
+	<input name="TITLE" placeholder="Game title" ngModel>
+	<input name="CONSOLE" placeholder="Console" ngModel>
+	<input name="REGION" placeholder="Region" ngModel>
+	<input name="LANGUAGE" placeholder="Language" ngModel>
+	<input name="EDITION" placeholder="Edition" ngModel>
+	<input name="CASE_TYPE" placeholder="Case type" ngModel>
+	<label for="completeCheckbox">Complete</label>
+	<input name="COMPLETE" placeholder="Complete" [(ngModel)]="completeStatusToggle" type="checkbox" id="completeCheckbox" (click)="toggle(); $event.preventDefault()" [indeterminate]="completeStatusToggle === ''">
+	<input type="submit">
+</form>
+
+@if (searched) {
+	<p>Number of games : {{games().length}}</p>
+}
 
 <table>
 	<tr>
@@ -14,7 +30,9 @@
 	}
 </table>
 
-<form #form="ngForm" (ngSubmit)="addGame(form)">
+<span>Add</span>
+
+<form #addForm="ngForm" (ngSubmit)="add(addForm)">
 	<input name="TITLE" placeholder="Game title" ngModel>
 	<input name="CONSOLE" placeholder="Console" ngModel>
 	<input type="submit">

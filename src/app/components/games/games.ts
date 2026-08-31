@@ -1,5 +1,4 @@
-import { Component, type Signal } from "@angular/core";
-import { toSignal } from "@angular/core/rxjs-interop";
+import { Component, signal, type WritableSignal } from "@angular/core";
 import { FormsModule, type NgForm } from "@angular/forms";
 import { DatabaseService } from "app/services/database";
 import { type Game } from "app/interfaces/game";
@@ -13,13 +12,34 @@ import { type Game } from "app/interfaces/game";
 })
 export class GamesComponent {
 
-	games: Signal<Game[]>;
+	completeStatusToggle: boolean | string = "";
+
+	searched = false;
+	games: WritableSignal<Game[]>;
 
 	constructor (private databaseService: DatabaseService) {
-		this.games = toSignal<Game[], Game[]>(this.databaseService.getGames(), { initialValue: [] });
+		this.games = signal([]);
 	}
 
-	addGame (form: NgForm): void {
+	add (form: NgForm): void {
 		this.databaseService.addGame(form.value);
+	}
+
+	search (form: NgForm): void {
+		this.searched = true;
+
+		this.databaseService.searchGames(form.value).subscribe((results: Game[]) =>
+			this.games.set(results)
+		);
+	}
+
+	toggle () {
+		if (this.completeStatusToggle === "") {
+			this.completeStatusToggle = true;
+		} else if (this.completeStatusToggle === true) {
+			this.completeStatusToggle = false;
+		} else {
+			this.completeStatusToggle = "";
+		}
 	}
 }

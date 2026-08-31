@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, type HttpResponse } from "@angular/common/http";
 import { type Observable } from "rxjs";
-import { type Game } from "app/interfaces/game";
+import { type GameTemplate, type GameSubmission, type Game } from "app/interfaces/game";
 
 
 @Injectable({ providedIn: "root" })
@@ -9,7 +9,13 @@ export class DatabaseService {
 
 	constructor (private httpClient: HttpClient) {}
 
-	getGames = (): Observable<Game[]> => this.httpClient.get<Game[]>("/api/games");
+	searchGames (template: GameTemplate): Observable<Game[]> {
+		const params = Object.entries(template)
+			.filter(([key, value]) => value !== "")
+			.map(([key, value]) => `${key}=${value}`);
 
-	addGame = (game: Game): Observable<HttpResponse<Object>> => this.httpClient.post("/api/games", game, { observe: "response" });
+		return this.httpClient.get<Game[]>(`/api/games${params.length > 0 ? "?" : ""}${params.join("&")}`);
+	}
+
+	addGame = (game: GameSubmission): Observable<HttpResponse<Object>> => this.httpClient.post("/api/games", game, { observe: "response" });
 }
