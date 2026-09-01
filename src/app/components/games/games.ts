@@ -22,15 +22,14 @@ export class GamesComponent {
 	}
 
 	add (form: NgForm): void {
-		this.databaseService.addGame(form.value);
+		this.databaseService.addGame(form.value).subscribe();
 	}
 
 	search (form: NgForm): void {
-		this.searched = true;
-
-		this.databaseService.searchGames(form.value).subscribe((results: Game[]) =>
-			this.games.set(results)
-		);
+		this.databaseService.searchGames(form.value).subscribe((results: Game[]) => {
+			this.games.set(results);
+			this.searched = true;
+		});
 	}
 
 	toggle () {
