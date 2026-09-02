@@ -22,7 +22,12 @@ export class GamesComponent {
 	}
 
 	add (form: NgForm): void {
-		this.databaseService.addGame(form.value).subscribe();
+		const csv = [
+			Object.keys(form.value),
+			Object.values(form.value)
+		].map(row => row.join(",")).join("\n");
+
+		this.databaseService.addGames(csv).subscribe();
 	}
 
 	search (form: NgForm): void {
