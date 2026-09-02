@@ -1,4 +1,4 @@
-import { Component, signal } from "@angular/core";
+import { Component } from "@angular/core";
 import { RouterLink } from "@angular/router";
 
 
@@ -8,6 +8,4 @@ import { RouterLink } from "@angular/router";
 	templateUrl: "./home.html",
 	styleUrl: "./home.css"
 })
-export class HomeComponent {
-	protected readonly title = signal("website");
-}
+export class HomeComponent {}
