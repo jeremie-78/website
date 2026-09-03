@@ -11,8 +11,8 @@ export class DatabaseService {
 
 	searchGames (template: GameTemplate): Observable<Game[]> {
 		const params = Object.entries(template)
-			.filter(([key, value]) => value !== "")
-			.map(([key, value]) => `${key}=${value}`);
+		.filter(([key, value]) => value !== "")
+		.map(([key, value]) => `${key}=${value}`);
 
 		return this.httpClient.get<Game[]>(`/api/games${params.length > 0 ? "?" : ""}${params.join("&")}`);
 	}
