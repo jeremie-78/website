@@ -17,5 +17,5 @@ export class DatabaseService {
 		return this.httpClient.get<Game[]>(`/api/games${params.length > 0 ? "?" : ""}${params.join("&")}`);
 	}
 
-	addGames = (games: string): Observable<HttpResponse<Object>> => this.httpClient.post("/api/games", games, { observe: "response" });
+	addGames = (games: string): Observable<HttpResponse<Object>> => this.httpClient.post("/api/games", games, { headers: { "Content-Type": "text/csv"}, observe: "response" });
 }

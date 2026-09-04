@@ -21,13 +21,14 @@ export class GamesComponent {
 		this.games = signal([]);
 	}
 
-	add (form: NgForm): void {
-		const csv = [
-			Object.keys(form.value),
-			Object.values(form.value)
-		].map(row => row.join(",")).join("\n");
-
-		this.databaseService.addGames(csv).subscribe();
+	toggle () {
+		if (this.completeStatusToggle === "") {
+			this.completeStatusToggle = true;
+		} else if (this.completeStatusToggle === true) {
+			this.completeStatusToggle = false;
+		} else {
+			this.completeStatusToggle = "";
+		}
 	}
 
 	search (form: NgForm): void {
@@ -37,13 +38,16 @@ export class GamesComponent {
 		});
 	}
 
-	toggle () {
-		if (this.completeStatusToggle === "") {
-			this.completeStatusToggle = true;
-		} else if (this.completeStatusToggle === true) {
-			this.completeStatusToggle = false;
-		} else {
-			this.completeStatusToggle = "";
-		}
+	add (form: NgForm): void {
+		const csv = [
+			Object.keys(form.value),
+			Object.values(form.value)
+		].map(row => row.join(",")).join("\n");
+
+		this.databaseService.addGames(csv).subscribe();
+	}
+
+	async import (event: Event): Promise<void> {
+		this.databaseService.addGames(await ((event.target as HTMLInputElement).files as FileList)[0].text()).subscribe();
 	}
 }
