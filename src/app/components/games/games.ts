@@ -15,11 +15,9 @@ export class GamesComponent {
 	completeStatusToggle: boolean | string = "";
 
 	searched = false;
-	games: WritableSignal<Game[]>;
+	games: WritableSignal<Game[]> = signal([]);
 
-	constructor (private databaseService: DatabaseService) {
-		this.games = signal([]);
-	}
+	constructor (private databaseService: DatabaseService) {}
 
 	toggle () {
 		if (this.completeStatusToggle === "") {
