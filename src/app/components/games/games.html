@@ -7,8 +7,8 @@
 	<input name="LANGUAGE" placeholder="Language" ngModel>
 	<input name="EDITION" placeholder="Edition" ngModel>
 	<input name="CASE_TYPE" placeholder="Case type" ngModel>
-	<label for="completeCheckbox">Complete</label>
-	<input name="COMPLETE" placeholder="Complete" [(ngModel)]="completeStatusToggle" type="checkbox" id="completeCheckbox" (click)="toggle(); $event.preventDefault()" [indeterminate]="completeStatusToggle === ''">
+	<label for="completeTripleToggle">Complete</label>
+	<input name="COMPLETE" [(ngModel)]="completeStatusToggle" type="checkbox" id="completeTripleToggle" (click)="toggle(); $event.preventDefault()" [indeterminate]="completeStatusToggle === ''">
 	<input type="submit">
 </form>
 
@@ -20,12 +20,24 @@
 	<tr>
 		<th>Title</th>
 		<th>Console</th>
+		<th>Region</th>
+		<th>Language</th>
+		<th>Edition</th>
+		<th>Case type</th>
+		<th>Complete</th>
+		<th>Miscellaneous</th>
 	</tr>
 
 	@for (game of games(); track game) {
 		<tr>
 			<td>{{game.TITLE}}</td>
 			<td>{{game.CONSOLE}}</td>
+			<td>{{game.REGION}}</td>
+			<td>{{game.LANGUAGE}}</td>
+			<td>{{game.EDITION}}</td>
+			<td>{{game.CASE_TYPE}}</td>
+			<td>{{game.COMPLETE}}</td>
+			<td>{{game.MISC}}</td>
 		</tr>
 	}
 </table>
@@ -35,7 +47,19 @@
 <form #addForm="ngForm" (ngSubmit)="add(addForm)">
 	<input name="TITLE" placeholder="Game title" ngModel>
 	<input name="CONSOLE" placeholder="Console" ngModel>
+	<input name="REGION" placeholder="Region" ngModel>
+	<input name="LANGUAGE" placeholder="Language" ngModel>
+	<input name="EDITION" placeholder="Edition" ngModel>
+	<input name="CASE_TYPE" placeholder="Case type" ngModel>
+	<label for="completeCheckbox">Complete</label>
+	<input name="COMPLETE" type="checkbox" id="completeCheckbox" [ngModel]=true>
+	<input name="MISC" placeholder="Miscellaneous" ngModel>
 	<input type="submit">
 </form>
 
-<input type="file" (change)="import($event)" accept=".csv,.txt">
+<span>Import</span>
+
+<form (ngSubmit)="import(fileInput)">
+	<input #fileInput type="file" accept=".csv,.txt">
+	<input type="submit">
+</form>

@@ -39,13 +39,13 @@ export class GamesComponent {
 	add (form: NgForm): void {
 		const csv = [
 			Object.keys(form.value),
-			Object.values(form.value)
+			Object.values(form.value).map(value => JSON.stringify(value))
 		].map(row => row.join(",")).join("\n");
 
 		this.databaseService.addGames(csv).subscribe();
 	}
 
-	async import (event: Event): Promise<void> {
-		this.databaseService.addGames(await ((event.target as HTMLInputElement).files as FileList)[0].text()).subscribe();
+	async import (input: HTMLInputElement): Promise<void> {
+		this.databaseService.addGames(await (input.files as FileList)[0].text()).subscribe();
 	}
 }
