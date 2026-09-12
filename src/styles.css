@@ -1,0 +1,7 @@
+body {
+	margin: 1dvh;
+
+	app-root > * {
+		max-height: 98dvh;
+	}
+}
