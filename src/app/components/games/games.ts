@@ -1,4 +1,4 @@
-import { Component, signal, type WritableSignal } from "@angular/core";
+import { Component, signal, ViewChild, type WritableSignal } from "@angular/core";
 import { FormsModule, type NgForm } from "@angular/forms";
 import { DatabaseService } from "app/services/database";
 import { type Game } from "app/interfaces/game";
@@ -11,6 +11,8 @@ import { type Game } from "app/interfaces/game";
 	imports: [FormsModule]
 })
 export class GamesComponent {
+	@ViewChild("searchForm")
+	searchForm: NgForm;
 
 	completeStatusToggle: boolean | string = "";
 
@@ -42,10 +44,16 @@ export class GamesComponent {
 			Object.values(form.value).map(value => JSON.stringify(value))
 		].map(row => row.join(",")).join("\n");
 
-		this.databaseService.addGames(csv).subscribe();
+		this.databaseService.addGames(csv).subscribe(this.updateSearch);
+	}
+
+	del (game: Game): void {
+		this.databaseService.deleteGame(game).subscribe(this.updateSearch);
 	}
 
 	async import (input: HTMLInputElement): Promise<void> {
-		this.databaseService.addGames(await (input.files as FileList)[0].text()).subscribe();
+		this.databaseService.addGames(await (input.files as FileList)[0].text()).subscribe(this.updateSearch);
 	}
+
+	updateSearch = (): void => this.searchForm.ngSubmit.emit();
 }

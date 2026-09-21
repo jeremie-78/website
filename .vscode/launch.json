@@ -1,0 +1,18 @@
+{
+	"configurations": [
+		{
+			"type": "chrome",
+			"request": "launch",
+			"name": "website debug (Chrome)",
+			"url": "https://localhost/",
+			"webRoot": "${workspaceFolder}",
+			"sourceMaps": true,
+			"sourceMapPathOverrides": {
+				"webpack:///./*": "${workspaceFolder}/*",
+				"webpack:///src/*": "${workspaceFolder}/src/*",
+				"webpack:///*": "*"
+			},
+			"userDataDir": "%USERPROFILE%\\AppData\\Local\\Google\\Chrome\\User Data\\Debug"
+		}
+	]
+}

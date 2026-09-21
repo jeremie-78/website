@@ -18,4 +18,6 @@ export class DatabaseService {
 	}
 
 	addGames = (games: string): Observable<HttpResponse<Object>> => this.httpClient.post("/api/games", games, { headers: { "Content-Type": "text/csv"}, observe: "response" });
+
+	deleteGame = (game: Game): Observable<HttpResponse<Object>> => this.httpClient.delete("/api/games", { body: game, observe: "response" });
 }
